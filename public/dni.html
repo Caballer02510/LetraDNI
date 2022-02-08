@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <form  id="dni" action="/letras" method="get">
+        <label id="dni">Ponga su DNI: </label>
+        <input id="dni" type="text" pattern="[0-9]{8}[A-Za-a]{1}">
+        <input id="boton" type="submit" value="Obtener">
+    </form>
+    
+
+    <script>
+        document.getElementById("boton").addEventListener("click", Obtener);
+
+        function Obtener() {
+            
+                var dni = document.getElementById("dni").value;
+                var le //letr ->letra
+               
+                var expr_dni = /(^([0-9]{8,8}\-[A-Z]))$/;
+                
+
+                if (expr_dni.test(dni) == true) {
+                    numero = dni.substr(0, dni.length - 1);
+                    le = dni.substr(dni.length - 1, 1);
+                    numero = numero % 23;
+                    letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];
+                    letra = letras.substring(numero, numero + 1);
+                    if (letra != le.toUpperCase()) {
+                        alert('Dni erroneo, la letra del NIF no se corresponde');
+                    } else {
+                        alert('Dni correcto');
+                    }
+                } else {
+                    alert('Dni erroneo, formato no válido');
+                }
+            }
+
+    </script>
+
+    <!--Otra forma, pero no me termina de funcionar ninguna 
+
+        <script type="text/javascript">
+        dni.addEventListener('submit', inicio);
+        function inicio() {
+            var numero = document.querySelector("#num").value;
+            var dni = document.querySelector("#dni");
+            if (numero < 0 || numero> 99999999) {
+                alert("DNI Incorrecto.");
+                return false;
+            } else {
+                dni.setAttribute("action", "/letras");
+            }
+        };
+    </script> -->
+    
+</body>
+</html>
